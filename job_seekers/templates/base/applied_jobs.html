@@ -1,0 +1,14 @@
+{% extends 'base/main.html' %}
+
+
+{% block content %}
+
+{% for applied_job in applied_jobs %}
+
+<div class="container-fluid my-5" >
+    <p>{{applied_job.job}}</p>
+</div>
+
+{% endfor %}
+
+{% endblock %}

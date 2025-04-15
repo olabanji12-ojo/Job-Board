@@ -1,0 +1,90 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+<div class="my-5 employee_home_page">
+
+<div class="employee_intro">
+
+    <h2 class="text-center" >Employer Home Page</h2>
+
+    <h3 class="text-center" >Welcome <strong>{{user}}</strong></h3>
+
+</div>
+
+
+<form method="GET" action="" class="d-flex justify-content-center my-4">
+    <input 
+        class="form-control me-2 w-50" 
+        type="search" 
+        placeholder="Search for jobs, titles, companies..." 
+        aria-label="Search" 
+        name="q"
+        value = {{q}} >
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        {% for job in jobs %}
+        
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-5 ">
+            <div class="card w-100" style="width: 18rem;">
+                <img src="{{ job.job_logo.url }}" class="card-img-top" style="height: 400px;" alt="personnel1">
+                <div class="card-body">
+                <h5 class="card-title">{{job.title}}</h5>
+                <p class="card-text">{{job.description}}</p>
+                <p class="card-text">{{job.company_name}}</p>
+                <strong style="display: block;" class="card-title">{{job.employer}}</strong>
+
+                {% if job.employer == request.user %}
+                <a href="{% url 'edit_jobs' job.id %}" class="btn btn-primary">Edit Job details</a>
+                {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                {% if jobs.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1&q={{ q }}">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ jobs.previous_page_number }}&q={{ q }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}</span>
+                </li>
+
+                {% if jobs.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ jobs.next_page_number }}&q={{ q }}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ jobs.paginator.num_pages }}&q={{ q }}">Last</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+      
+</div>
+
+</div>
+{% endblock %}
+
+

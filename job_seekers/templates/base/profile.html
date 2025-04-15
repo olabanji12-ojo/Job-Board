@@ -1,0 +1,39 @@
+{% extends 'base/main.html' %}
+
+
+{% block content %}
+
+<div id="profile" class="mt-5 container-fluid">
+    <a class="btn btn-primary"  href="{% url 'profile_swap' user.id %}">Edit profile</a>
+    <div>
+        {{ profile.user.name }}
+    </div>
+
+    <div>
+        {{ profile.skills }}
+    </div>
+
+    <div>
+      <strong>Profile Picture:</strong>
+      {% if profile.profile_picture %}
+          <img src="{{profile.profile_picture.url}}" alt="profile_picture">
+      {% else %}
+          <p>Haven't uploaded a profile picture.</p>
+      {% endif %}
+  </div>
+
+    <div>
+      <strong>CV:</strong>
+      {% if profile.CV %}
+          <a href="{{ profile.CV.url }}" target="_blank" class="btn btn-link">
+              Download CV
+          </a>
+      {% else %}
+          <p>No CV uploaded.</p>
+      {% endif %}
+  </div>
+
+
+</div>
+
+{% endblock %}

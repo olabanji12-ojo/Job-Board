@@ -1,0 +1,51 @@
+{% extends 'base/main.html' %}
+
+<!-- {% load static %} -->
+{% block content %}
+
+<h2 class="text-center mt-5">Job details Id</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-5 mt-5 ">
+            <div class="card w-100" style="width: 18rem;">
+                <img src="{{ job.job_logo.url }}" class="card-img-top" style="height: 400px;" alt="personnel1">
+                <div class="card-body">
+                <h5 class="card-title">{{job.title}}</h5>
+                <p class="card-text">{{job.description}}</p>
+                <p class="card-text">{{job.company_name}}</p>
+                 
+                {% if applied_jobs %}
+                <button class="btn btn-info disabled">
+                    Job Already applied for
+                </button>
+                {% else %}
+                    <button id="job_applied" class="btn btn-primary"
+                        hx-post="{% url 'job_details_apply' user.id job.id %}"
+                        hx-trigger="click"
+                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                        hx-target="#job_applied"
+                        hx-swap='outerHTML'
+                        hx-confirm="Are you sure you want to apply for this job?"
+                        >
+                        Apply For job
+                    </button>
+                {% endif %}
+               
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+<h2 class="text-center">Company Description</h2>
+
+<div class="container bg-secondary mt-5">
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+</div>
+
+
+
+
+{% endblock %}

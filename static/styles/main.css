@@ -1,0 +1,71 @@
+/* body{
+    background-color: aqua;
+}
+ */
+
+/* REGISTER PAGE STYLING */
+
+.register-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.register-page .form-group {
+    margin-bottom: 1rem;
+}
+
+.register-page label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.register-page input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.register-page input:focus {
+    border-color: #4a90e2;
+}
+
+.register-btn {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+    background-color: #357ab8;
+}
+
+.register-page p {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+
+.job-details{
+    justify-content: center;
+}
+
+#employer_login{
+    display: block;
+    font-size: large;
+}

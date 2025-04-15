@@ -1,0 +1,63 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <div class="text-center mb-4">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" class="rounded-circle mb-3" alt="Profile Picture" width="150" height="150">
+            {% else %}
+                <p class="text-muted">Haven't uploaded a profile picture.</p>
+            {% endif %}
+            <h4 class="mb-1">{{ profile.user.name }}</h4>
+            <small class="text-muted">{{ profile.user.email }}</small>
+        </div>
+
+        <div class="mb-3">
+            <h6 class="text-uppercase text-secondary">Skills</h6>
+            <p><strong>{{ profile.skills }}</strong></p>
+        </div>
+
+        <div class="mb-3">
+            <h6 class="text-uppercase text-secondary">Bio</h6>
+            <p><strong>{{ profile.user.bio }}</strong></p>
+        </div>
+
+        <div>
+            <h6 class="text-uppercase text-secondary">CV</h6>
+            {% if profile.CV %}
+                <a href="{{ profile.CV.url }}" target="_blank" class="btn btn-outline-primary btn-sm"
+                hx-boost="true"
+                >
+                    Download CV
+                </a>
+            {% else %}
+                <p class="text-muted">No CV uploaded.</p>
+            {% endif %}
+        </div>
+        {% if job_application.status == 'accepted' %}
+
+        <button class="btn btn-info disabled">
+            Applicant already accepted
+        </button>
+
+        {% else %}
+
+        <button id="applicant_accept" class="btn btn-success btn-sm"
+        hx-post="{% url 'accept_applicant' user.id job.id  %}"
+        hx-target="#applicant_accept"
+        hx-trigger="click"
+        hx-confirm="Are you sure you want to accept applicant?"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        hx-swap="outerHTML"
+        >
+            Accept Applicant
+        </button>
+
+        {% endif %}
+        
+
+
+    </div>
+</div>
+{% endblock %}
