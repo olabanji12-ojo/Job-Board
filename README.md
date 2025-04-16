@@ -42,16 +42,20 @@ source venv/bin/activate  # or venv\Scripts\activate on Windows
 
 
 3. Install dependencies
-4. 
+ 
  pip install -r requirements.txt
 
 
 
-5. Run migrations
+4. Run migrations
 
 python manage.py migrate
 
 
+
+5. Start the development server
+
+python manage.py runserver
 
 
 
@@ -62,8 +66,4 @@ python manage.py migrate
 - 📊 Employer analytics dashboard
 
 
-
-5. Start the development server
-
-python manage.py runserver
 
