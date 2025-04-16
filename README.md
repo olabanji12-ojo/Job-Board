@@ -52,6 +52,17 @@ source venv/bin/activate  # or venv\Scripts\activate on Windows
 python manage.py migrate
 
 
+
+
+
+## 🔮 Upcoming Features
+
+- 📬 Email notifications for new job applications (via Django signals)
+- 🧠 AI-powered job recommendations (experimental)
+- 📊 Employer analytics dashboard
+
+
+
 5. Start the development server
 
 python manage.py runserver
