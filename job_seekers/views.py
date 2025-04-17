@@ -37,7 +37,9 @@ def login_page(request):
         if user:
             if user.role == 'employee':
                 login(request, user)
+                messages.success(request, 'You have logged in successfully, Make sure to update your profile in the profile link')
                 return redirect('employee_home_page')
+                
             else:
                 messages.error(request, 'Access denied: You are not registered as an employee.')
         else:

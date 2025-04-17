@@ -26,13 +26,15 @@
   >
 
     <p>Haven't signed in yet? <a href="{% url 'register_page' %}">Register</a></p>
-    <strong id="employer_login" >Login as an employer <a href="{% url 'employer_login_page' %}">Click here</a></strong>
+    <strong id="employer_login"
+    hx-boost="true"
+    >Login as an employer <a href="{% url 'employer_login_page' %}">Click here</a></strong>
     
   </div>
  
   <div>
 
-    <a href="">Forgotten password?</a>
+    <a href="{% url 'reset_password' %}">Forgotten password?</a>
   </div>
 </form>
 

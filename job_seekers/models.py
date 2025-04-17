@@ -2,6 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
+
 class CustomUser(AbstractUser):
     
     name = models.CharField(max_length=255, blank=True)
@@ -34,6 +35,7 @@ class Profile(models.Model):
         return self.user.name
     
     
+    
 class Job(models.Model):
     
     job_logo = models.ImageField(default='download.jpg', upload_to='static/images', null=True, blank=True)
@@ -45,8 +47,16 @@ class Job(models.Model):
     company_details = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100)
     
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-updated', '-created']
+    
+    
     def __str__(self):
         return self.title
+    
     
         
 class Job_application(models.Model):

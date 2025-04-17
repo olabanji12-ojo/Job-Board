@@ -1,13 +1,19 @@
-
-
 <div id="popup">
     <script>
-        
-        Swal.fire({
-            title: "Good job!",
-            text: "You have successfully registered!",
-            icon: "success"
-          });
+      Swal.fire({
+        title: "Good job!",
+        text: "You have successfully registered!",
+        icon: "success",
+        confirmButtonText: "Continue"
+      }).then(() => {
+        var userRole = "{{ request.user.role }}";  // Django context variable passed to JS
+  
+        if (userRole == 'employer') {
+          window.location.href = "{% url 'employer_home_page' %}";
+        } else {
+          window.location.href = "{% url 'employee_home_page' %}";
+        }
+      });
     </script>
-
-</div>
+  </div>
+  

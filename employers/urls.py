@@ -17,9 +17,8 @@ urlpatterns = [
     
     path('accept_applicant/<int:user_id>/<int:job_id>/', views.accept_applicant, name='accept_applicant'),
     
+    path('delete_jobs/<int:id>/', views.delete_jobs, name='delete_jobs'),
+    
 ]   
+
  
-
-
-
-

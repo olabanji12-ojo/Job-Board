@@ -69,3 +69,56 @@
     display: block;
     font-size: large;
 }
+
+
+/* main.css */
+
+/* Card styling for applied jobs */
+.card {
+    transition: all 0.3s ease-in-out;
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom styling for alert */
+.alert {
+    font-size: 1.1rem;
+}
+
+
+.welcome-hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('../images/job4.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+  }
+  
+  .about-section .about-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    height: 100%;
+  }
+  
+  .section-heading {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cta-section {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+  }
+  
+
+  /* Custom button hover effect */
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Custom form input padding */
+input[type="submit"] {
+    padding: 10px 20px;
+}

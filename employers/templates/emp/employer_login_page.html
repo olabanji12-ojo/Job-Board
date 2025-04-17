@@ -25,7 +25,9 @@
   <div  class="mt-2">
 
     <p>Haven't signed in yet? <a href="{% url 'register_page' %}">Register</a></p>
-    <p>Login as an employer <a href="{% url 'employer_login_page' %}">Click here</a></p>
+    <strong id="employer_login"
+    hx-boost="true"
+    >Login as an employee <a href="{% url 'login_page' %}">Click here</a></strong>
     
   </div>
  
