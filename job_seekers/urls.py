@@ -19,10 +19,15 @@ urlpatterns = [
     
     path('profile/', views.profile, name='profile'),
     
+    path('chat_with_ai/', views.chat_with_ai, name='chat_with_ai'),
+    
     
     # SWEET ALERTS
     path('register_sweetalert/', views.register_sweetalert, name='register_sweetalert'),
-    path('profile_swap/<int:id>/', views.profile_swap, name='profile_swap')
+    path('profile_swap/<int:id>/', views.profile_swap, name='profile_swap'),
+    
+    path('get_user_response/', views.get_user_response, name='get_user_response'),
+    
     
 ]
 

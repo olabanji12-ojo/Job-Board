@@ -122,3 +122,37 @@
 input[type="submit"] {
     padding: 10px 20px;
 }
+
+/* AI CHAT FUNCTIONALITY */
+
+.chat-container {
+    height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f8f9fa;
+}
+
+.user-message, .bot-message {
+    max-width: 75%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #e2e3e5;
+    color: #41464b;
+}
+
+
+

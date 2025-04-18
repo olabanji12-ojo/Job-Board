@@ -1,0 +1,76 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<h2 class="text-center my-4">Chat with our AI</h2>
+
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-body chat-container" id="chat-box">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="card-footer p-3">
+            <div class="input-group">
+                <input type="text" id="user-message" class="form-control" placeholder="Type a message..." />
+                <button id="send-btn" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const chatBox = document.getElementById("chat-box");
+        let userInput = document.getElementById("user-message");
+        const sendBtn = document.getElementById("send-btn");
+
+        function addMessage(sender, text) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add(sender);
+            messageDiv.textContent = text;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return messageDiv;
+        }
+
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === "") return;
+
+            addMessage("user-message", message);
+            userInput.value = "";
+
+            try {
+                const response = await fetch("/get_user_response/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrftoken,
+                    },
+                    body: JSON.stringify({ userInput: message }),
+                });
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let botMessageContainer = addMessage("bot-message", "");
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    let chunk = decoder.decode(value, { stream: true });
+                    botMessageContainer.textContent += chunk;
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") sendMessage();
+        });
+    });
+</script>
+
+{% endblock %}

@@ -9,6 +9,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+ <!-- CSRF_TOKEN FOR THE FRONTEND -->
+
+    <script type="text/javascript" >
+		
+		function getToken(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let i = 0; i < cookies.length; i++) {
+					const cookie = cookies[i].trim();
+					// Does this cookie string begin with the name we want?
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+		const csrftoken = getToken('csrftoken');
+	</script>
+    
+<!-- END OF THE CSRF_TOKEN -->
+
 </head>
 <body>
 
@@ -35,7 +61,7 @@
                 {% else %}
                     <a class="nav-link" href="{% url 'login_page' %}">Login</a>
                 {% endif %}
-                <a class="nav-link active" href="">Chat with our AI</a>
+                <a class="nav-link active" href="{% url 'chat_with_ai' %}">Chat with our AI</a>
             </div>
             
             {% if request.user.role == 'employee' %}

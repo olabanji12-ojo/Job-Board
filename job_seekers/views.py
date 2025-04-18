@@ -16,6 +16,11 @@ from .decorators import restrict_to_employee
 
 from django.core.paginator import Paginator
 
+from django.http import StreamingHttpResponse
+import requests
+import json
+import time
+
 def home(request):
     
     user = request.user
@@ -193,10 +198,45 @@ def profile_swap(request, id):
     context = {'user': user, 'profile': profile, 'form': form}
     return render(request, 'partials/profile_swap.html', context)
 
+# AI CHAT INTEGRATION
+
+def chat_with_ai(request):
+    
+    return render(request, 'base/chat_with_ai.html')
 
 
+def get_user_response(request):
+    data = json.loads(request.body)
+    user_input = data['userInput']
+    print(user_input)
+    
+    url = 'http://localhost:11434/api/generate'
+    
+    ai_api = {
+        'model': 'gemma:2b',
+        'prompt': user_input,
+        'stream': True
+    }
+    
+    response = requests.post(url, json=ai_api, stream=True)
 
+    def event_stream():
+        print('\nAI response:', end='', flush=True)
 
+        for line in response.iter_lines():
+            if line:
+                try:
+                    json_data = json.loads(line.decode('utf-8'))
+                    result = json_data.get('response', '')
+                    yield result + " "  # Yield each response chunk
+                    time.sleep(0.2)  # Small delay to simulate real-time response
+                    print(result, end='', flush=True)
+
+                except json.JSONDecodeError:
+                    yield 'Error: Could not decode JSON response'
+                    break
+
+    return StreamingHttpResponse(event_stream(), content_type='text/plain')
 
 
 
