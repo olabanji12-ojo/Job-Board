@@ -1,6 +1,7 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
+
 <div class="container my-5">
     {% if applied_jobs %}
         <h2 class="mb-4">Your Applied Jobs</h2>
@@ -11,16 +12,26 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ applied_job.job.title }}</h5>
                             <p class="card-text">{{ applied_job.job.company_name }}</p>
-                            <p class="text-muted">Applied on: {{ applied_job.date_applied }}</p>
+                            <!-- <p class="text-muted">Applied on: {{ applied_job.date_applied }}</p> -->
                         </div>
                     </div>
                 </div>
             {% endfor %}
+            
         </div>
+
     {% else %}
+
         <div class="alert alert-info" role="alert">
             <p>You haven't applied for any jobs yet. Start browsing and apply for jobs today!</p>
         </div>
+
+        <a href="{% url 'employee_home_page' %}" class="btn btn-primary"></a>
     {% endif %}
+
 </div>
 {% endblock %}
+
+
+
+

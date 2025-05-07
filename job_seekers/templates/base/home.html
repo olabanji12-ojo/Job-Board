@@ -10,7 +10,7 @@
     {% if request.user.is_authenticated %}
       <p class="lead mt-3">Thanks for signing up with us. Explore opportunities now!</p>
     {% else %}
-      <a class="btn btn-info btn-lg mt-4" href="{% url 'login_page' %}">Login or Register with us</a>
+      <a class="btn btn-info btn-lg mt-4" href="{% url 'main_login' %}">Login or Register with us</a>
     {% endif %}
   </div>
 

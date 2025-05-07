@@ -28,7 +28,8 @@ urlpatterns = [
     
     path('get_user_response/', views.get_user_response, name='get_user_response'),
     
-    
+    path('main_login/',views.main_login, name='main_login'),
+        
 ]
 
 

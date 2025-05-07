@@ -14,7 +14,7 @@ from django.urls import reverse
 
 from job_seekers.signals import notify_job_seeker
 
-@login_required(login_url='employer_login_page')
+@login_required(login_url='main_login')
 @restrict_to_employer
 def employer_home_page(request):
     if request.user == 'employee':
@@ -61,7 +61,7 @@ def employer_login_page(request):
     return render(request, 'emp/employer_login_page.html')
 
 
-@login_required(login_url='employer_login_page')
+@login_required(login_url='main_login')
 @restrict_to_employer
 def create_jobs(request):
     
@@ -77,7 +77,7 @@ def create_jobs(request):
     return render(request, 'emp/create_jobs.html', context)
 
 
-@login_required(login_url='employer_login_page')
+@login_required(login_url='main_login')
 @restrict_to_employer
 def edit_jobs(request, id):
     job = Job.objects.get(id=id)
@@ -93,7 +93,7 @@ def edit_jobs(request, id):
     return render(request, 'emp/create_jobs.html', context)
  
  
-@login_required(login_url='employer_login_page')
+@login_required(login_url='main_login')
 @restrict_to_employer 
 def delete_jobs(request, id):
     
@@ -108,7 +108,7 @@ def delete_jobs(request, id):
     return response    
         
         
-@login_required(login_url='employer_login_page')
+@login_required(login_url='main_login')
 @restrict_to_employer
 def account_page(request):
     
@@ -116,7 +116,7 @@ def account_page(request):
     return render(request, 'emp/account_page.html', context) 
 
 
-@login_required(login_url='employer_login_page')
+@login_required(login_url='main_login')
 @restrict_to_employer
 def view_applicants(request):
     
@@ -130,20 +130,27 @@ def view_applicants(request):
     return render(request, 'emp/view_applicants.html', context)
  
 
-@login_required(login_url='employer_login_page')
+@login_required(login_url='main_login')
 @restrict_to_employer
-def applicants_profile(request, id):
-    user = CustomUser.objects.get(id=id)
-    job_application = Job_application.objects.get(user=user)
-    profile = Profile.objects.get(user=job_application.user)
-    
-    job = job_application.job
-    
-    context = {'user': user, 'profile': profile, 'job':job, 'job_application': job_application}
+def applicants_profile(request, user_id, job_id):
+    user = CustomUser.objects.get(id=user_id)
+    job = Job.objects.get(id=job_id)
+
+    # Safely get the application for this user and job
+    job_application = Job_application.objects.get(user=user, job=job)
+    profile = Profile.objects.get(user=user)
+
+    context = {
+        'user': user,
+        'profile': profile,
+        'job': job,
+        'job_application': job_application
+    }
     return render(request, 'emp/applicants_profile.html', context)
 
 
-@login_required(login_url='employer_login_page')
+
+@login_required(login_url='main_login')
 @restrict_to_employer
 def accept_applicant(request, user_id, job_id):
     user = CustomUser.objects.get(id=user_id)

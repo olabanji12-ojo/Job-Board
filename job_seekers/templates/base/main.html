@@ -41,7 +41,7 @@
 <!-- NAV BAR STYLING -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/"><img class="navbar-logo" src="{% static 'images/mylogo.png' %}" alt="my-job-logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -51,15 +51,18 @@
                 {% if request.user.role == 'employee' %}
                     <a class="nav-link active" aria-current="page" href="{% url 'employee_home_page' %}">Home</a>
                     <a class="nav-link active" href="{% url 'profile' %}">Profile</a>
-                {% else %}
+                {% elif request.user.role == 'employer' %}
                     <a class="nav-link active" aria-current="page" href="{% url 'employer_home_page' %}">Home</a>
                     <a class="nav-link active" href="{% url 'account_page' %}">Account</a>
+
+                {% else %}
+                
                 {% endif %}
                 
                 {% if request.user.is_authenticated %}
                     <a class="nav-link" href="{% url 'logout_page' %}">Logout</a>
                 {% else %}
-                    <a class="nav-link" href="{% url 'login_page' %}">Login</a>
+                    <a class="nav-link" href="{% url 'main_login' %}">Login</a>
                 {% endif %}
                 <a class="nav-link active" href="{% url 'chat_with_ai' %}">Chat with our AI</a>
             </div>

@@ -4,6 +4,77 @@
 
 {% load static %}
 
+<style>
+    .employee_home_page {
+        background-color: #10172a;
+        color: #ffffff; /* Light text for contrast */
+        min-height: 100vh;
+        padding-bottom: 50px;
+    }
+    
+    .employee_intro h2,
+    .employee_intro h3 {
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+    
+    .card {
+        background-color: #1e293b; /* Slightly lighter than background */
+        color: #e2e8f0;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: scale(1.02);
+    }
+    
+    .card .btn-primary {
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+    }
+    
+    .card .btn-primary:hover {
+        background-color: #2563eb;
+    }
+    
+    .card .btn-danger {
+        background-color: #ef4444;
+        border-color: #ef4444;
+    }
+    
+    .card .btn-danger:hover {
+        background-color: #dc2626;
+    }
+    
+    .form-control,
+    .btn-outline-success {
+        border-radius: 10px;
+    }
+    
+    .btn-outline-success {
+        color: #22c55e;
+        border-color: #22c55e;
+    }
+    
+    .btn-outline-success:hover {
+        background-color: #22c55e;
+        color: #10172a;
+    }
+    
+    .pagination .page-link {
+        background-color: #1e293b;
+        color: #e2e8f0;
+        border: none;
+    }
+    
+    .pagination .page-link:hover {
+        background-color: #3b82f6;
+        color: white;
+    }
+    
+</style>
 
 <div class="my-5 employee_home_page">
 

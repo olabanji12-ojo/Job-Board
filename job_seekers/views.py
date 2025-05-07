@@ -74,7 +74,7 @@ def register_page(request):
     return render(request, 'base/register_page.html', context)  
  
  
-@login_required(login_url='login_page')
+@login_required(login_url='main_login')
 @restrict_to_employee
 def employee_home_page(request):
     if request.user.role == 'employer':  # Checking for 'employer' role
@@ -106,10 +106,10 @@ def logout_page(request):
 
         logout(request)
         messages.success(request, 'You have been logged out successfully!')
-        return redirect('login_page')
+        return redirect('main_login')
 
         
-@login_required(login_url='login_page')
+@login_required(login_url='main_login')
 @restrict_to_employee        
 def job_details(request, user_id, job_id):
     
@@ -128,7 +128,7 @@ def job_details(request, user_id, job_id):
 
 
 
-@login_required(login_url='login_page')
+@login_required(login_url='main_login')
 @restrict_to_employee
 def job_details_apply(request, user_id, job_id):
     
@@ -150,7 +150,7 @@ def job_details_apply(request, user_id, job_id):
     return render(request, 'partials/jobs_details_applied.html', context)
 
 
-@login_required(login_url='login_page')
+@login_required(login_url='main_login')
 @restrict_to_employee
 def applied_jobs(request):
     
@@ -162,7 +162,7 @@ def applied_jobs(request):
     return render(request, 'base/applied_jobs.html', context)
 
 
-@login_required(login_url='login_page')
+@login_required(login_url='main_login')
 @restrict_to_employee
 def profile(request):
     
@@ -180,7 +180,7 @@ def profile(request):
     return render(request, 'base/profile.html', context)
 
 
-@login_required(login_url='login_page')
+@login_required(login_url='main_login')
 @restrict_to_employee
 def profile_swap(request, id):
     
@@ -198,8 +198,16 @@ def profile_swap(request, id):
     context = {'user': user, 'profile': profile, 'form': form}
     return render(request, 'partials/profile_swap.html', context)
 
+
+
+
+def main_login(request):
+    
+    return render(request, 'base/main_login.html')
+
 # AI CHAT INTEGRATION
 
+@login_required(login_url='main_login')
 def chat_with_ai(request):
     
     return render(request, 'base/chat_with_ai.html')
