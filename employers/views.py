@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from job_seekers.models import CustomUser, Profile, Job, Job_application
 
-from job_seekers.forms import JobForm
+from job_seekers.forms import JobForm, ProfileForm
 from job_seekers.decorators import restrict_to_employee, restrict_to_employer
 from django.contrib.auth.decorators import login_required
 
@@ -91,8 +91,7 @@ def edit_jobs(request, id):
             
     context = {'job': job, 'form': form}
     return render(request, 'emp/create_jobs.html', context)
- 
- 
+  
 @login_required(login_url='main_login')
 @restrict_to_employer 
 def delete_jobs(request, id):
@@ -111,7 +110,7 @@ def delete_jobs(request, id):
 @login_required(login_url='main_login')
 @restrict_to_employer
 def account_page(request):
-    
+        
     context = {}
     return render(request, 'emp/account_page.html', context) 
 

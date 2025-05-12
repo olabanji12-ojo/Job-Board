@@ -8,6 +8,7 @@ class CustomUser(AbstractUser):
     name = models.CharField(max_length=255, blank=True)
     email = models.EmailField(unique=True)
     bio = models.TextField(blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
     
     ROLE_CHOICES = {
         ('employee', 'Employee'),
