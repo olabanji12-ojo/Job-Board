@@ -1,6 +1,7 @@
 from django import forms
-from .models import CustomUser, Job, Profile
+from .models import CustomUser, Job, Profile, Employer_Account
 from django.contrib.auth.forms import UserCreationForm
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -49,4 +50,14 @@ class JobForm(forms.ModelForm):
     #     for field in self.fields.values():
     #         field.widget.attrs['class'] = 'form-control'    
         
+
+class EmployerAccountForm(forms.ModelForm):
+    class Meta:
+        model = Employer_Account
+        fields = '__all__'
         
+    def __init__(self, *args, **kwargs):
+        super(EmployerAccountForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+     

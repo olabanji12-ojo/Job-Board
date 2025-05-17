@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 
 from django.contrib import messages
-from job_seekers.models import CustomUser, Profile, Job, Job_application
+from job_seekers.models import CustomUser, Profile, Job, Job_application, Employer_Account
 
-from job_seekers.forms import JobForm, ProfileForm
+from job_seekers.forms import JobForm, ProfileForm, EmployerAccountForm
 from job_seekers.decorators import restrict_to_employee, restrict_to_employer
 from django.contrib.auth.decorators import login_required
 
@@ -110,8 +110,11 @@ def delete_jobs(request, id):
 @login_required(login_url='main_login')
 @restrict_to_employer
 def account_page(request):
+    user = request.user
+    employer_account = Employer_Account.objects.get(user=user)
+    form = EmployerAccountForm(instance=employer_account,)
         
-    context = {}
+    context = {'form': form, 'employer_account': employer_account}
     return render(request, 'emp/account_page.html', context) 
 
 
@@ -168,6 +171,27 @@ def accept_applicant(request, user_id, job_id):
     
     context = {'user':user, 'job': job, 'job_application':job_application}
     return render(request, 'partials/accept_applicant.html', context)
+
+
+
+@login_required(login_url='main_login')
+@restrict_to_employer
+def account_swap(request, id):
+    
+    user = CustomUser.objects.get(id=id)
+    employer = Employer_Account.objects.get(user=user)
+    
+    form = EmployerAccountForm(instance=employer)
+    
+    if request.method == 'POST':
+        form = EmployerAccountForm(request.POST, request.FILES, instance=employer)
+        if form.is_valid():
+            form.save()
+            return redirect('account_page')
+            
+    context = {'user': user, 'employer': employer, 'form': form}
+    return render(request, 'partials/account_swap.html', context)
+
 
 
 

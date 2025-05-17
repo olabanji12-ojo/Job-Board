@@ -1,6 +1,8 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
+
+
 <h1 class="text-center mt-3">Register page</h1>
 <div class="register-container">
     <form class="register-page" method="POST" action="" id="popup" 
@@ -51,8 +53,35 @@
             {{ form.password2.errors }}
         </div>
 
-        <input class="register-btn" type="submit" value="Register">
-        <p>Already signed up? <a href="{% url 'login_page' %}">Login</a></p>
+        <button class="register-btn" type="submit" id="register-btn">
+        Register
+        </button>
+
+        <p>Already signed up? <a href="{% url 'main_login' %}">Login</a></p>
     </form>
 </div>
+
+
+
+<script>
+  document.body.addEventListener('htmx:beforeRequest', function(evt) {
+    const button = document.getElementById('register-btn');
+    if (button) {
+      button.disabled = true;
+      button.innerHTML = `
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Loading...</span>
+      `;
+    }
+  });
+ 
+  document.body.addEventListener('htmx:responseError', function(evt) {
+    const button = document.getElementById('register-btn');
+    if (button) {
+      button.disabled = false;
+      button.innerHTML = "Register";
+    }
+  });
+</script>
+
 {% endblock %}

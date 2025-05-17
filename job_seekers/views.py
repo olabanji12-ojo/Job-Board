@@ -42,7 +42,11 @@ def login_page(request):
         if user:
             if user.role == 'employee':
                 login(request, user)
-                messages.success(request, 'You have logged in successfully, Make sure to update your profile in the profile link')
+                # messages.success(request, 'You have logged in successfully, Make sure to update your profile in the profile link')
+                if not user.has_seen_login_message:
+                    messages.success(request, 'You have logged in successfully, Make sure to update your profile in the profile link')
+                    user.has_seen_login_message = True
+                    user.save()
                 return redirect('employee_home_page')
                 
             else:

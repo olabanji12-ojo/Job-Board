@@ -1,35 +1,58 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
+<div class="container">
+  <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+          <h3 class="text-center mb-4 fw-bold">Job Seeker Login</h3>
 
-<h1 class="text-center my-4">Job Seekers Login Page</h1>
+          <form method="POST">
+            {% csrf_token %}
 
-<form method="POST" class="mx-auto bg-light p-4 rounded shadow-sm" style="max-width: 400px;">
-  {% csrf_token %}
-  
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" name="email" placeholder="Enter email">
+            <div class="form-floating mb-3">
+              <input 
+                type="email" 
+                class="form-control" 
+                id="emailInput" 
+                name="email" 
+                placeholder="Enter your email" 
+                required
+              >
+              <label for="emailInput">Email address</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input 
+                type="password" 
+                class="form-control" 
+                id="passwordInput" 
+                name="password" 
+                placeholder="Enter your password" 
+                required
+              >
+              <label for="passwordInput">Password</label>
+            </div>
+
+            <div class="d-grid mb-3">
+              <button type="submit" class="btn btn-primary btn-lg rounded-3">Login</button>
+            </div>
+
+            <div class="text-center">
+              <p class="mb-1">
+                New here?
+                <a href="{% url 'register_page' %}" class="link-primary fw-semibold text-decoration-none">Register now</a>
+              </p>
+              <p class="mb-0">
+                <a href="{% url 'reset_password' %}" class="link-secondary text-decoration-none">Forgot password?</a>
+              </p>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" name="password" placeholder="Enter password">
-  </div>
-
-  <div class="d-grid mb-3">
-    <button type="submit" class="btn btn-primary btn-sm">Login</button>
-  </div>
-
-  <div class="text-center">
-    <p class="mb-1">
-      Haven't signed in yet? 
-      <a href="{% url 'register_page' %}" class="link-primary text-decoration-none fw-semibold">Register here</a>
-    </p>
-    <p class="mb-0">
-      <a href="{% url 'reset_password' %}" class="link-secondary text-decoration-none">Forgot password?</a>
-    </p>
-  </div>
-</form>
-
+</div>
 {% endblock %}

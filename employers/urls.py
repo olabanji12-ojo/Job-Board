@@ -19,6 +19,9 @@ urlpatterns = [
     
     path('delete_jobs/<int:id>/', views.delete_jobs, name='delete_jobs'),
     
+    path('account_swap/<int:id>/', views.account_swap, name='account_swap'),
+
+    
 ]   
 
  

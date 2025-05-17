@@ -5,19 +5,53 @@
 <div id="home_page">
 
   <!-- Hero Section -->
-  <div class="text-center p-5 text-white bg-dark">
-    <h1 class="display-4">Welcome to Emmanuel's Job Board</h1>
-    {% if request.user.is_authenticated %}
-      <p class="lead mt-3">Thanks for signing up with us. Explore opportunities now!</p>
-    {% else %}
-      <a class="btn btn-info btn-lg mt-4" href="{% url 'main_login' %}">Login or Register with us</a>
-    {% endif %}
-  </div>
+  <section class="hero-section text-white text-center d-flex align-items-center justify-content-center">
+    <div>
+      <h1 class="display-3 fw-bold">Find Jobs. Hire Talents.</h1>
+      <p class="lead">Your journey to meaningful work starts here.</p>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'employee_home_page' %}" class="btn btn-outline-light btn-lg mt-3">Explore Jobs</a>
+      {% else %}
+        <a href="{% url 'main_login' %}" class="btn btn-info btn-lg mt-3">Login / Register</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Why Choose Us?</h2>
+      <p class="text-muted">Trusted by thousands to bridge talent with opportunity</p>
+    </div>
+    <div class="row text-center g-4">
+      <div class="col-md-4">
+        <div class="p-4 border rounded shadow-sm">
+          <img src="{% static 'images/icon-growth.png' %}" width="60" alt="growth icon">
+          <h4 class="mt-3">Career Growth</h4>
+          <p>We connect ambitious professionals with leading employers across industries.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 border rounded shadow-sm">
+          <img src="{% static 'images/icon-fee.png' %}" width="60" alt="fee icon">
+          <h4 class="mt-3">Transparent Pricing</h4>
+          <p>Employers enjoy simple, no-hidden-cost packages. Job seekers? Always free.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 border rounded shadow-sm">
+          <img src="{% static 'images/icon-trust.png' %}" width="60" alt="trust icon">
+          <h4 class="mt-3">Reliable Network</h4>
+          <p>Our platform is trusted by over 10,000 users and top-tier Nigerian companies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Carousel Section -->
   <div class="container-fluid my-5">
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-      <div class="carousel-inner">
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner rounded shadow-sm">
         <div class="carousel-item active">
           <img src="{% static 'images/job2.jpg' %}" class="d-block w-100" alt="job1">
         </div>
@@ -39,39 +73,12 @@
     </div>
   </div>
 
-  <!-- About Section -->
-  <div class="container my-5">
-    <h2 class="text-center mb-4">ABOUT US</h2>
-    <div class="row g-4">
-
-      <div class="col-md-6">
-        <div class="border rounded p-4 bg-light h-100">
-          <h3>Growth & Rates</h3>
-          <p>We connect thousands of job seekers with top-rated companies every month. Our platform helps you grow your career by offering access to a variety of industries and roles tailored to your aspirations.</p>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="border rounded p-4 bg-light h-100">
-          <h3>Transparent Fees</h3>
-          <p>Our services are free for job seekers. Employers enjoy clear, competitive pricing for job postings and premium features. No hidden fees—just a straightforward, effective hiring experience.</p>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="border rounded p-4 bg-light h-100">
-          <h3>Trusted by Many</h3>
-          <p>Join thousands who trust us to find their dream jobs or top talent. We've built lasting relationships with reputable companies across Nigeria, ensuring you get real opportunities that match your goals.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Final Call-to-Action -->
-  <div class="container text-center my-5 p-5 bg-body-tertiary border rounded">
-    <h2>Let’s help you find your next job or your next hire—with confidence, speed, and support.</h2>
-  </div>
+  <!-- Call to Action -->
+  <section class="container text-center my-5 py-5 bg-body-tertiary border rounded">
+    <h2 class="mb-3">Join the Future of Work</h2>
+    <p class="lead">Whether you're hiring or seeking your next role, we're here to help.</p>
+    <a href="{% url 'main_login' %}" class="btn btn-success btn-lg mt-3">Get Started</a>
+  </section>
 
 </div>
 

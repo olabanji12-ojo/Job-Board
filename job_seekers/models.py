@@ -2,13 +2,13 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
-
 class CustomUser(AbstractUser):
     
     name = models.CharField(max_length=255, blank=True)
     email = models.EmailField(unique=True)
     bio = models.TextField(blank=True, null=True)
-    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    # phone_number = models.CharField(max_length=20, blank=True, null=True)
+    has_seen_login_message = models.BooleanField(default=False)
     
     ROLE_CHOICES = {
         ('employee', 'Employee'),
@@ -30,6 +30,8 @@ class Profile(models.Model):
     CV = models.FileField(null=True, blank=True)
     profile_picture = models.ImageField(default='download.jpg', upload_to='static/images', null=True, blank=True)
     education = models.CharField(max_length=200, null=True, blank=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+
     
     
     def __str__(self):
@@ -79,4 +81,14 @@ class Job_application(models.Model):
         return f'{self.user} --- {self.job} -- {self.status}'
     
     
-# Create your models here.
+class Employer_Account(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='employer_account')
+    company_name = models.CharField(max_length=255)
+    company_details = models.TextField()
+    location = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    company_logo = models.ImageField(default='download.jpg', upload_to='static/images', null=True, blank=True)
+    
+    
+    def __str__(self):
+        return self.user.name
